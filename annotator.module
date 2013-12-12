@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements hook_init().       
+ * Implements hook_init().
  */
 function annotator_init() {
   if (user_access('administer annotations') ||
@@ -18,39 +18,6 @@ function annotator_init() {
   }
 }
 
-/**
- * Implements hook_permission().
- */
-function annotator_permission() {
-  /*
-  return array(
-    'create annotations' => array(
-      'title' => t('Create annotations'),
-      'description' => t('Allows users to annotation tasks.'),
-      'restrict access' => TRUE,
-    ),
-    'view annotations' => array(
-      'title' => t('View annotations'),
-      'description' => t('Allows users to view annotations.'),
-      'restrict access' => TRUE,
-    ),
-    'edit any annotations' => array(
-      'title' => t('Edit any annotations'),
-      'description' => t('Allows users to edit any annotations.'),
-      'restrict access' => TRUE,
-    ),
-    'edit own annotations' => array(
-      'title' => t('Edit own annotation'),
-      'description' => t('Allows users to edit own annotations.'),
-      'restrict access' => TRUE,
-    ),
-    'administer annotations' => array(
-      'title' => t('Administer annotations'),
-      'description' => t('Allows users to administer annotations.'),
-      'restrict access' => TRUE,
-    ),
-  );*/
-}
 
 /**
  * Implements hook_menu().
