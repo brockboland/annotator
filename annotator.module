@@ -1,25 +1,6 @@
 <?php
 
 /**
- * Implements hook_init().
- */
-function annotator_init() {
-  if (user_access('administer annotations') ||
-      user_access('view annotations') ||
-      user_access('create annotations')) {
-
-    if (module_exists('locale')) {
-      drupal_add_library('annotator', 'jsgettext', TRUE);
-    }
-    drupal_add_library('annotator', 'annotator', TRUE);
-    drupal_add_js(drupal_get_path('module', 'annotator') . '/js/annotator.js');
-
-    annotator_execute_plugins();
-  }
-}
-
-
-/**
  * Implements hook_menu().
  */
 function annotator_menu() {
@@ -120,4 +101,22 @@ function annotator_execute_plugins($annotation = NULL, $op = NULL) {
  */
 function annotator_annotation_alter($entity, $op) {
   annotator_execute_plugins($entity, $op);
+}
+
+/**
+ * Implements hook_node_view().
+ */
+function annotator_node_view($node, $view_mode, $langcode) {
+  // When viewing a node, include the annotator JS if user has permission
+  if ($view_mode == 'full') {
+    if (user_access('administer annotations') ||
+      user_access('view annotations') ||
+      user_access('create annotations')) {
+
+      drupal_add_library('annotator', 'annotator', TRUE);
+      drupal_add_js(drupal_get_path('module', 'annotator') . '/js/annotator.js');
+
+      annotator_execute_plugins();
+    }
+  }
 }
